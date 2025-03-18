@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { db } from '../firebaseConfig';
 import { collection, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
@@ -48,50 +48,10 @@ const ViewInventory = () => {
 
   useEffect(() => {
     fetchInventory();
-  }, [applyFilters]);
+  }, []);
 
   // Apply filters when filters or inventory changes
-  useEffect(() => {
-    if (inventory.length > 0) {
-      applyFilters();
-    }
-  }, [filters, inventory]);
-
-  // Update an item
-  const updateItem = async (item) => {
-    try {
-      const itemRef = doc(db, 'Ingredients', item.id);
-      const { id, ...itemData } = item;
-      await updateDoc(itemRef, itemData);
-      fetchInventory();
-    } catch (err) {
-      console.error("Error updating item: ", err);
-      setError("Une erreur s'est produite lors de la mise à jour de l'article.");
-    }
-  };
-
-  // Delete an item
-  const deleteItem = async (id) => {
-    try {
-      await deleteDoc(doc(db, 'Ingredients', id));
-      fetchInventory();
-    } catch (err) {
-      console.error("Error deleting item: ", err);
-      setError("Une erreur s'est produite lors de la suppression de l'article.");
-    }
-  };
-
-  // Handle filter changes
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters(prevFilters => ({
-      ...prevFilters,
-      [name]: value
-    }));
-  };
-
-  // Filter function
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     const result = inventory.filter(item => {
       // Name filter
       if (filters.name && !item.name?.toLowerCase().includes(filters.name.toLowerCase())) {
@@ -141,6 +101,45 @@ const ViewInventory = () => {
     });
     
     setFilteredItems(result);
+  }, [filters, inventory]);
+
+  useEffect(() => {
+    if (inventory.length > 0) {
+      applyFilters();
+    }
+  }, [filters, inventory, applyFilters]);
+
+  // Update an item
+  const updateItem = async (item) => {
+    try {
+      const itemRef = doc(db, 'Ingredients', item.id);
+      const { id, ...itemData } = item;
+      await updateDoc(itemRef, itemData);
+      fetchInventory();
+    } catch (err) {
+      console.error("Error updating item: ", err);
+      setError("Une erreur s'est produite lors de la mise à jour de l'article.");
+    }
+  };
+
+  // Delete an item
+  const deleteItem = async (id) => {
+    try {
+      await deleteDoc(doc(db, 'Ingredients', id));
+      fetchInventory();
+    } catch (err) {
+      console.error("Error deleting item: ", err);
+      setError("Une erreur s'est produite lors de la suppression de l'article.");
+    }
+  };
+
+  // Handle filter changes
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      [name]: value
+    }));
   };
 
   // Clear all filters

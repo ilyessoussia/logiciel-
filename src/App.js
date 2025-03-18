@@ -105,45 +105,7 @@ function App() {
     return true;
   };
 
-  const recordSale = (sale) => {
-    // Update inventory
-    const newInventory = [...inventory];
-    let allItemsAvailable = true;
-    
-    // First check if all items are available in sufficient quantity
-    for (const soldItem of sale.items) {
-      const inventoryItem = newInventory.find(item => item.id === soldItem.id);
-      if (!inventoryItem || inventoryItem.quantity < soldItem.quantity) {
-        allItemsAvailable = false;
-        break;
-      }
-    }
-    
-    if (!allItemsAvailable) {
-      return false;
-    }
-    
-    // If all items are available, update inventory
-    for (const soldItem of sale.items) {
-      const itemIndex = newInventory.findIndex(item => item.id === soldItem.id);
-      newInventory[itemIndex] = {
-        ...newInventory[itemIndex],
-        quantity: newInventory[itemIndex].quantity - soldItem.quantity
-      };
-    }
-    
-    setInventory(newInventory);
-    
-    // Add to sales history
-    const newSale = {
-      ...sale,
-      id: Date.now().toString(),
-      date: new Date().toISOString()
-    };
-    
-    setSalesHistory([...salesHistory, newSale]);
-    return true;
-  };
+
 
   return (
     <Router>
