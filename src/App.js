@@ -5,6 +5,7 @@ import AddItem from './components/Ajout';
 import ViewInventory from './components/ViewInventory';
 import CreateRecipe from './components/CreateRecipe';
 import SellProduct from './components/SellProduct';
+import Login from './components/Login';
 import './App.css';
 
 function App() {
@@ -18,7 +19,9 @@ function App() {
     return savedRecipes ? JSON.parse(savedRecipes) : [];
   });
   
-
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('isAuthenticated') === 'true';
+  });
 
   useEffect(() => {
     localStorage.setItem('inventory', JSON.stringify(inventory));
@@ -27,8 +30,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem('recipes', JSON.stringify(recipes));
   }, [recipes]);
-  
- 
 
   const addItem = (item) => {
     setInventory([...inventory, { ...item, id: Date.now().toString() }]);
@@ -100,28 +101,41 @@ function App() {
     return true;
   };
 
-
+  // Logout function that updates the state
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    setIsAuthenticated(false);
+  };
 
   return (
     <Router>
       <div className="app">
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route 
-            path="/add-item" 
-            element={<AddItem addItem={addItem} />} 
-          />
-          <Route 
-            path="/view-inventory" 
-            element={<ViewInventory inventory={inventory} updateItem={updateItem} deleteItem={deleteItem} />} 
-          />
-          <Route 
-            path="/create-recipe" 
-            element={<CreateRecipe inventory={inventory} recipes={recipes} addRecipe={addRecipe} executeRecipe={executeRecipe} />} 
-          />
-          <Route path="/sales" element={<SellProduct />} 
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/login" element={
+            isAuthenticated ? <Navigate to="/" /> : <Login setIsAuthenticated={setIsAuthenticated} />
+          } />
+          
+          <Route path="/" element={
+            isAuthenticated ? <HomePage onLogout={handleLogout} /> : <Navigate to="/login" />
+          } />
+          
+          <Route path="/add-item" element={
+            isAuthenticated ? <AddItem addItem={addItem} /> : <Navigate to="/login" />
+          } />
+          
+          <Route path="/view-inventory" element={
+            isAuthenticated ? <ViewInventory inventory={inventory} updateItem={updateItem} deleteItem={deleteItem} /> : <Navigate to="/login" />
+          } />
+          
+          <Route path="/create-recipe" element={
+            isAuthenticated ? <CreateRecipe inventory={inventory} recipes={recipes} addRecipe={addRecipe} executeRecipe={executeRecipe} /> : <Navigate to="/login" />
+          } />
+          
+          <Route path="/sales" element={
+            isAuthenticated ? <SellProduct /> : <Navigate to="/login" />
+          } />
+          
+          <Route path="*" element={<Navigate to={isAuthenticated ? "/" : "/login"} />} />
         </Routes>
       </div>
     </Router>

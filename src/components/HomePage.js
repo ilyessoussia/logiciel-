@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css'; // Import the CSS file
 
-const HomePage = () => {
+const HomePage = ({ onLogout }) => {
   return (
     <div className="home-page-container">
       <div className="home-page">
@@ -35,6 +35,13 @@ const HomePage = () => {
             <h3>Vente des Articles</h3>
             <p>Enregistrer les ventes et suivre l'historique des transactions.</p>
           </Link>
+          
+          {/* Logout button styled as a menu item to match the design */}
+          <div className="menu-item" onClick={onLogout} style={{cursor: 'pointer'}}>
+            <i className="fas fa-sign-out-alt"></i>
+            <h3>Déconnexion</h3>
+            <p>Se déconnecter du système</p>
+          </div>
         </div>
       </div>
     </div>
