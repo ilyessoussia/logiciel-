@@ -48,7 +48,7 @@ const ViewInventory = () => {
 
   useEffect(() => {
     fetchInventory();
-  }, []);
+  }, [applyFilters]);
 
   // Apply filters when filters or inventory changes
   useEffect(() => {
