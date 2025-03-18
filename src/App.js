@@ -18,11 +18,6 @@ function App() {
     return savedRecipes ? JSON.parse(savedRecipes) : [];
   });
   
-  const [salesHistory, setSalesHistory] = useState(() => {
-    const savedSales = localStorage.getItem('salesHistory');
-    return savedSales ? JSON.parse(savedSales) : [];
-  });
-
   useEffect(() => {
     localStorage.setItem('inventory', JSON.stringify(inventory));
   }, [inventory]);
