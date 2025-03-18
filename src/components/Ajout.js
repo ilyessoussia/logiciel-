@@ -56,7 +56,7 @@ const AddItem = () => {
       alert("Erreur lors de l'ajout de l'article."); // Show error message if needed
     }
   };
-  
+
   const handleClear = () => {
     setItem({
       name: '',
@@ -298,7 +298,7 @@ const AddItem = () => {
 
           <div className="form-actions">
             <button type="button" className="btn-cancel" onClick={() => navigate('/')}>
-              Annuler
+              Retourner
             </button>
             <button type="button" className="btn-clear" onClick={handleClear}>
               Effacer

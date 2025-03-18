@@ -80,6 +80,7 @@ body {
   display: flex;
   border-bottom: none;
   margin-bottom: 1rem;
+  flex-wrap: wrap; /* Allow tabs to wrap on small screens */
 }
 
 .recipe-management .tab {
@@ -152,11 +153,19 @@ body {
 }
 
 /* Tables */
+.recipe-management .table-container {
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling for tables */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  margin-bottom: 1rem;
+}
+
 .recipe-management .ingredients-table,
 .recipe-management .selection-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
+  min-width: 500px; /* Ensure table doesn't shrink too much */
 }
 
 .recipe-management .ingredients-table th,
@@ -167,6 +176,7 @@ body {
   font-weight: 600;
   border-bottom: 1px solid rgba(218, 165, 32, 0.3);
   color: #DAA520;
+  white-space: nowrap; /* Prevent text wrapping in headers */
 }
 
 .recipe-management .ingredients-table td,
@@ -324,11 +334,18 @@ body {
 }
 
 /* Execution History Table */
+.recipe-management .quantity-changes-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 1rem;
+}
+
 .recipe-management .quantity-changes-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
   background-color: rgba(50, 40, 40, 0.8);
+  min-width: 500px;
 }
 
 .recipe-management .quantity-changes-table th,
@@ -343,6 +360,7 @@ body {
   background-color: rgba(50, 40, 40, 0.8);
   font-weight: 600;
   color: #DAA520;
+  white-space: nowrap;
 }
 
 .recipe-management .quantity-changes-table td.quantity-used {
@@ -367,6 +385,8 @@ body {
   margin-bottom: 1rem;
   border-bottom: 1px solid rgba(218, 165, 32, 0.3);
   padding-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .recipe-management .execution-details-header h4 {
@@ -431,6 +451,10 @@ body {
 
 /* Responsive Improvements */
 @media (max-width: 768px) {
+  .recipe-management {
+    padding: 1rem;
+  }
+
   .recipe-management .recipe-info-panel {
     flex-direction: column;
   }
@@ -438,19 +462,32 @@ body {
   .recipe-management .tab {
     padding: 0.6rem 1rem;
     font-size: 0.9rem;
+    flex-grow: 1;
+    text-align: center;
   }
 
-  .recipe-management .ingredients-table th,
-  .recipe-management .ingredients-table td,
-  .recipe-management .selection-table th,
-  .recipe-management .selection-table td {
-    padding: 0.5rem 0.3rem;
-    font-size: 0.8rem;
+  .recipe-management .execution-details-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .recipe-management .btn-add,
-  .recipe-management .btn-delete {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.8rem;
+  .recipe-management .execution-details-header button {
+    align-self: flex-end;
+  }
+
+  .recipe-management h1 {
+    font-size: 1.3rem;
+  }
+
+  .recipe-management h2 {
+    font-size: 1.1rem;
+  }
+
+  .recipe-management .panel {
+    padding: 0.75rem;
+  }
+
+  .recipe-management .action-button-container {
+    justify-content: center;
   }
 }

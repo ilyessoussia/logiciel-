@@ -358,6 +358,8 @@ const executeRecipe = async () => {
             {selectedIngredients.length === 0 ? (
               <p className="no-items">Aucun ingrédient sélectionné</p>
             ) : (
+
+              <div class="table-container">
               <table className="selection-table">
                 <thead>
                   <tr>
@@ -398,6 +400,7 @@ const executeRecipe = async () => {
                   ))}
                 </tbody>
               </table>
+              </div>
             )}
   
             <div className="action-button-container">
@@ -421,7 +424,8 @@ const executeRecipe = async () => {
             />
             <i className="search-icon">🔍</i>
           </div>
-  
+
+          <div class="table-container">
           <table className="ingredients-table">
             <thead>
               <tr>
@@ -458,6 +462,7 @@ const executeRecipe = async () => {
               )}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     )}
@@ -478,7 +483,8 @@ const executeRecipe = async () => {
               />
               <i className="search-icon">🔍</i>
             </div>
-  
+
+            <div class="table-container">
             <table className="ingredients-table">
               <thead>
                 <tr>
@@ -514,6 +520,7 @@ const executeRecipe = async () => {
                 )}
               </tbody>
             </table>
+            </div>
           </div>
         </div>
   
@@ -555,6 +562,7 @@ const executeRecipe = async () => {
             <div className="panel">
               <h3>Ingrédients de la Recette</h3>
   
+              <div class="table-container">
               <table className="selection-table">
                 <thead>
                   <tr>
@@ -589,6 +597,7 @@ const executeRecipe = async () => {
                   ))}
                 </tbody>
               </table>
+              </div>
   
               <div className="action-button-container">
                 <button 
@@ -624,6 +633,7 @@ const executeRecipe = async () => {
             <p className="no-items">Aucun historique d'exécution trouvé</p>
           ) : (
             <>
+             <div class="table-container">
               <table className="ingredients-table">
                 <thead>
                   <tr>
@@ -658,6 +668,7 @@ const executeRecipe = async () => {
                     ))}
                 </tbody>
               </table>
+              </div>
   
               {selectedExecution && (
   <div className="execution-details panel">
@@ -684,6 +695,7 @@ const executeRecipe = async () => {
     </div>
 
     <h5>Changements des Ingrédients:</h5>
+    <div class="quantity-changes-table-container">
     <table className="quantity-changes-table">
       <thead>
         <tr>
@@ -706,6 +718,7 @@ const executeRecipe = async () => {
   ))}
 </tbody>
     </table>
+    </div>
   </div>
               )}
             </>
