@@ -1,5 +1,17 @@
 /* Login.css */
 
+.login-image {
+  width: 100%;
+  max-width: 150px; /* Adjust size as needed */
+  height: auto;
+  display: block;
+  margin: 0 auto 20px;
+  border-radius: 50%; /* Makes it rounded */
+  object-fit: cover; /* Ensures the image is well-fitted */
+}
+
+
+
 .login-container {
     background: linear-gradient(135deg, #800000, #8B0000, #B8860B, #DAA520);
     min-height: 100vh;

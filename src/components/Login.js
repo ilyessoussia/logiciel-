@@ -11,7 +11,7 @@ const Login = ({ setIsAuthenticated }) => {
   // Hardcoded credentials for testing
   const validCredentials = {
     username: 'admin',
-    password: 'password123'
+    password: 'foody123'
   };
 
   const handleSubmit = (e) => {
@@ -25,14 +25,11 @@ const Login = ({ setIsAuthenticated }) => {
     
     // Check credentials
     if (username === validCredentials.username && password === validCredentials.password) {
-      // Store authentication state in localStorage
       localStorage.setItem('isAuthenticated', 'true');
-      // Update authentication state
       setIsAuthenticated(true);
-      // Navigate to home page
       navigate('/');
     } else {
-      setError('Nom d\'utilisateur ou mot de passe incorrect');
+      setError("Nom d'utilisateur ou mot de passe incorrect");
     }
   };
 
@@ -40,7 +37,8 @@ const Login = ({ setIsAuthenticated }) => {
     <div className="login-container">
       <div className="login-card">
         <h2>Connexion</h2>
-        
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYTbryE-wHbSGZsEPNSiGcIUB948GryyD4bw&s" alt="Login Illustration" className="login-image" />
+
         {error && (
           <div className="alert alert-danger">
             {error}
