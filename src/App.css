@@ -1,0 +1,32 @@
+
+
+
+
+/* Alerts */
+.alert {
+  padding: 15px;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  border-left: 4px solid transparent;
+  box-shadow: var(--shadow);
+}
+
+.alert-danger {
+  background-color: rgba(231, 76, 60, 0.1);
+  border-left-color: var(--danger);
+}
+
+.alert-success {
+  background-color: rgba(46, 204, 113, 0.1);
+  border-left-color: var(--success);
+}
+
+.alert-warning {
+  background-color: rgba(243, 156, 18, 0.1);
+  border-left-color: var(--warning);
+}
+
+
+
