@@ -317,6 +317,7 @@ const SellProduct = () => {
             <p className="no-items">Aucun produit sélectionné</p>
           ) : (
             <div className="table-container">
+              <div className="selection-table-container"> 
               <table className="selection-table">
                 <thead>
                   <tr>
@@ -358,6 +359,7 @@ const SellProduct = () => {
                   ))}
                 </tbody>
               </table>
+              </div> 
             </div>
           )}
           
