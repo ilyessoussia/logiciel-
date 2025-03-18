@@ -18,6 +18,8 @@ function App() {
     return savedRecipes ? JSON.parse(savedRecipes) : [];
   });
   
+
+
   useEffect(() => {
     localStorage.setItem('inventory', JSON.stringify(inventory));
   }, [inventory]);
@@ -26,9 +28,7 @@ function App() {
     localStorage.setItem('recipes', JSON.stringify(recipes));
   }, [recipes]);
   
-  useEffect(() => {
-    localStorage.setItem('salesHistory', JSON.stringify(salesHistory));
-  }, [salesHistory]);
+ 
 
   const addItem = (item) => {
     setInventory([...inventory, { ...item, id: Date.now().toString() }]);
