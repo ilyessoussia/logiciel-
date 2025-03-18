@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../firebaseConfig';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import './Login.css';
 
 const Login = ({ setIsAuthenticated }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Hardcoded credentials for testing
-  const validCredentials = {
-    username: 'admin',
-    password: 'foody123'
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Simple validation
@@ -23,14 +20,39 @@ const Login = ({ setIsAuthenticated }) => {
       return;
     }
     
-    // Check credentials
-    if (username === validCredentials.username && password === validCredentials.password) {
-      localStorage.setItem('isAuthenticated', 'true');
-      setIsAuthenticated(true);
-      navigate('/');
-    } else {
-      setError("Nom d'utilisateur ou mot de passe incorrect");
+    setLoading(true);
+    
+    try {
+      // Create a query to find the user with the given username
+      const q = query(collection(db, "Users"), where("username", "==", username));
+      const querySnapshot = await getDocs(q);
+      
+      if (querySnapshot.empty) {
+        setError("Nom d'utilisateur ou mot de passe incorrect");
+        setLoading(false);
+        return;
+      }
+      
+      // Check if password matches
+      const userDoc = querySnapshot.docs[0];
+      const userData = userDoc.data();
+      
+      if (userData.password === password) {
+        // Store authentication in sessionStorage instead of localStorage
+        sessionStorage.setItem('isAuthenticated', 'true');
+        sessionStorage.setItem('userId', userDoc.id);
+        sessionStorage.setItem('userName', userData.username);
+        setIsAuthenticated(true);
+        navigate('/');
+      } else {
+        setError("Nom d'utilisateur ou mot de passe incorrect");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setError("Une erreur est survenue lors de la connexion");
     }
+    
+    setLoading(false);
   };
 
   return (
@@ -54,6 +76,7 @@ const Login = ({ setIsAuthenticated }) => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Entrez votre nom d'utilisateur"
+              disabled={loading}
             />
           </div>
           
@@ -65,11 +88,12 @@ const Login = ({ setIsAuthenticated }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Entrez votre mot de passe"
+              disabled={loading}
             />
           </div>
           
-          <button type="submit" className="login-button">
-            Se connecter
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? 'Connexion...' : 'Se connecter'}
           </button>
         </form>
       </div>

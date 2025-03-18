@@ -9,6 +9,7 @@
   border-radius: 15px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   color: #f0f0f0;
+  overflow-x: hidden;
 }
 
 .sell-product-container h1 {
@@ -96,6 +97,13 @@
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: #f0f0f0;
+}
+
+.sell-product-container .panel {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .sell-product-container .panel h3 {
@@ -378,172 +386,137 @@
   background-color: rgba(19, 132, 150, 0.9);
 }
 
-/* Responsive Adjustments */
 @media (max-width: 1200px) {
   .sell-product-container .sale-info-panel {
     grid-template-columns: 1fr;
+    gap: 15px;
   }
 }
 
+/* Better handling of form elements on mobile */
 @media (max-width: 768px) {
+  .sell-product-container {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
   .sell-product-container .sale-content {
     flex-direction: column;
+    gap: 15px;
   }
 
   .sell-product-container .panel {
-    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
   }
 
-  .sell-product-container table {
-    display: block;
-    overflow-x: auto;
-  }
-}
-/* Responsive Table Adjustments */
-.sell-product-container .table-container {
-  overflow-x: auto;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  border: 1px solid rgba(218, 165, 32, 0.3);
-  background-color: rgba(40, 40, 40, 0.7);
-}
-
-.sell-product-container .products-table,
-.sell-product-container .selection-table,
-.sell-product-container .sales-history-table,
-.sell-product-container .sold-products-table {
-  min-width: 600px; /* Ensures tables don't collapse too much */
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .sell-product-container .table-container {
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
+  .sell-product-container .form-group input,
+  .sell-product-container .form-group textarea,
+  .sell-product-container .form-group select {
+    font-size: 14px;
+    padding: 8px;
   }
 
+  /* Adjust table headers and cells for better mobile view */
   .sell-product-container .products-table th,
   .sell-product-container .selection-table th,
   .sell-product-container .sales-history-table th,
   .sell-product-container .sold-products-table th {
-    font-size: 14px;
-    padding: 8px;
+    padding: 8px 6px;
+    font-size: 13px;
   }
 
   .sell-product-container .products-table td,
   .sell-product-container .selection-table td,
   .sell-product-container .sales-history-table td,
   .sell-product-container .sold-products-table td {
+    padding: 8px 6px;
     font-size: 13px;
-    padding: 8px;
   }
 
-  .sell-product-container .btn-add,
-  .sell-product-container .btn-delete,
-  .sell-product-container .btn-view {
-    padding: 4px 8px;
-    font-size: 12px;
+  /* Make sure the quantity input doesn't overflow */
+  .sell-product-container .quantity-input {
+    width: 70px;
   }
 
   .sell-product-container .quantity-input input {
-    width: 80px;
+    width: 100%;
     padding: 4px 6px;
+    font-size: 13px;
   }
-
-  .sell-product-container .search-input {
-    padding-left: 30px;
+  
+  /* Improve buttons for mobile touch targets */
+  .sell-product-container .btn-add,
+  .sell-product-container .btn-delete,
+  .sell-product-container .btn-view {
+    padding: 6px 10px;
+    font-size: 13px;
   }
-
-  .sell-product-container .search-icon {
-    font-size: 14px;
+  
+  /* Make sure the tabs don't overflow */
+  .sell-product-container .tabs {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  /* Ensure the action buttons don't overflow */
+  .sell-product-container .action-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .sell-product-container .btn-sale {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
   }
 }
 
+/* Even smaller screens */
 @media (max-width: 480px) {
-  .sell-product-container .tabs {
-    flex-direction: column;
+  .sell-product-container h1 {
+    font-size: 20px;
+    margin-bottom: 15px;
   }
-
-  .sell-product-container .tab {
-    margin-right: 0;
-    margin-bottom: 5px;
-    border-radius: 4px;
-    border-bottom: 1px solid rgba(218, 165, 32, 0.3);
+  
+  .sell-product-container .panel h3 {
+    font-size: 16px;
   }
-
-  .sell-product-container .tab.active {
-    margin-bottom: 0;
+  
+  .sell-product-container .btn-return {
+    font-size: 12px;
+    padding: 6px 10px;
   }
-
-  .sell-product-container .sale-info-panel {
-    gap: 10px;
+  
+  /* Adjust form elements for very small screens */
+  .sell-product-container .form-group label {
+    font-size: 14px;
   }
-
-  .sell-product-container .panel {
-    padding: 15px;
-  }
-
+  
   .sell-product-container .form-group input,
   .sell-product-container .form-group textarea,
   .sell-product-container .form-group select {
     font-size: 13px;
-  }
-
-  .sell-product-container .btn-sale {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-
-  .sell-product-container .sale-details-info {
-    padding: 10px;
-  }
-
-  .sell-product-container .sale-details-info p {
-    font-size: 13px;
-  }
-}
-/* Ensure the "Articles Sélectionnés" table is scrollable and responsive */
-.sell-product-container .selection-table-container {
-  overflow-x: auto; /* Enable horizontal scrolling */
-  margin-bottom: 20px;
-  border-radius: 8px;
-  border: 1px solid rgba(218, 165, 32, 0.3);
-  background-color: rgba(40, 40, 40, 0.7);
-}
-
-.sell-product-container .selection-table {
-  min-width: 600px; /* Minimum width to prevent collapsing */
-  width: 100%;
-}
-
-/* Adjust table cells for smaller screens */
-@media (max-width: 768px) {
-  .sell-product-container .selection-table th,
-  .sell-product-container .selection-table td {
-    font-size: 14px;
-    padding: 8px;
-  }
-
-  .sell-product-container .quantity-input input {
-    width: 80px; /* Adjust input width for smaller screens */
-    padding: 4px 6px;
-  }
-
-  .sell-product-container .btn-delete {
-    padding: 4px 8px;
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .sell-product-container .selection-table th,
-  .sell-product-container .selection-table td {
-    font-size: 13px;
     padding: 6px;
   }
-
-  .sell-product-container .quantity-input input {
-    width: 70px; /* Further reduce input width for very small screens */
+  
+  /* Further reduce table text size */
+  .sell-product-container .products-table th,
+  .sell-product-container .selection-table th,
+  .sell-product-container .sales-history-table th,
+  .sell-product-container .sold-products-table th,
+  .sell-product-container .products-table td,
+  .sell-product-container .selection-table td,
+  .sell-product-container .sales-history-table td,
+  .sell-product-container .sold-products-table td {
+    padding: 6px 4px;
+    font-size: 12px;
+  }
+  
+  /* Optimize quantity input for very small screens */
+  .sell-product-container .quantity-input {
+    width: 60px;
   }
 }

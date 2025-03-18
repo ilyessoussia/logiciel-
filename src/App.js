@@ -20,7 +20,7 @@ function App() {
   });
   
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem('isAuthenticated') === 'true';
+    return sessionStorage.getItem('isAuthenticated') === 'true';
   });
 
   useEffect(() => {
@@ -103,7 +103,9 @@ function App() {
 
   // Logout function that updates the state
   const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated');
+    sessionStorage.removeItem('isAuthenticated');
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('userName');
     setIsAuthenticated(false);
   };
 
