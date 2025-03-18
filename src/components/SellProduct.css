@@ -503,3 +503,47 @@
     font-size: 13px;
   }
 }
+/* Ensure the "Articles Sélectionnés" table is scrollable and responsive */
+.sell-product-container .selection-table-container {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(218, 165, 32, 0.3);
+  background-color: rgba(40, 40, 40, 0.7);
+}
+
+.sell-product-container .selection-table {
+  min-width: 600px; /* Minimum width to prevent collapsing */
+  width: 100%;
+}
+
+/* Adjust table cells for smaller screens */
+@media (max-width: 768px) {
+  .sell-product-container .selection-table th,
+  .sell-product-container .selection-table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .sell-product-container .quantity-input input {
+    width: 80px; /* Adjust input width for smaller screens */
+    padding: 4px 6px;
+  }
+
+  .sell-product-container .btn-delete {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sell-product-container .selection-table th,
+  .sell-product-container .selection-table td {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  .sell-product-container .quantity-input input {
+    width: 70px; /* Further reduce input width for very small screens */
+  }
+}
